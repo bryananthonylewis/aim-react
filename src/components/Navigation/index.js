@@ -1,0 +1,75 @@
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
+import SignOutButton from "../SignOut";
+import * as routes from "../../constants/routes";
+
+import { Navbar } from "react-materialize";
+import "./index.css";
+
+const Navigation = (props, { authUser }) => (
+  <div>{authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
+);
+
+Navigation.contextTypes = {
+  authUser: PropTypes.object
+};
+
+const NavigationAuth = () => (
+  <Navbar brand="AIM" right>
+    <li>
+      <Link to={routes.HOME}>Home</Link>
+    </li>
+    <li>
+      <Link to={routes.LANDING}>Landing</Link>
+    </li>
+    <li>
+      <Link to={routes.INVENTORY}>Start Inventory</Link>
+    </li>
+    <li>
+      <Link to={routes.ACCOUNT}>Account</Link>
+    </li>
+    <li>
+      <SignOutButton />
+    </li>
+  </Navbar>
+  // <ul>
+  //   <li>
+  //     <Link to={routes.LANDING}>Landing</Link>
+  //   </li>
+  //   <li>
+  //     <Link to={routes.HOME}>Home</Link>
+  //   </li>
+  //   <li>
+  //     <Link to={routes.INVENTORY}>Start Inventory</Link>
+  //   </li>
+  //   <li>
+  //     <Link to={routes.ACCOUNT}>Account</Link>
+  //   </li>
+  //   <li>
+  //     <SignOutButton />
+  //   </li>
+  // </ul>
+);
+
+const NavigationNonAuth = () => (
+  <Navbar brand="logo" right>
+    <li>
+      <Link to={routes.LANDING}>Landing</Link>
+    </li>
+    <li>
+      <Link to={routes.SIGN_IN}>Sign In</Link>
+    </li>
+  </Navbar>
+  // <ul>
+  //   <li>
+  //     <Link to={routes.LANDING}>Landing</Link>
+  //   </li>
+  //   <li>
+  //     <Link to={routes.SIGN_IN}>Sign In</Link>
+  //   </li>
+  // </ul>
+);
+
+export default Navigation;
